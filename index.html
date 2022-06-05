@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href=".\style.css" />
+    <script src="script.js" type="module" defer></script>
+    <title>Cadastro</title>
+  </head>
+  <body>
+    <main class="container">
+      <div class="wrapper">
+        <h1 class="title">Buscar Cep</h1>
+        <div class="row">
+          <div class="inputbox">
+            <input type="text" id="cep" required />
+            <label for="cep">CEP</label>
+          </div>
+          <div class="button">
+            <button id="btn">Buscar</button>
+          </div>
+          <div class="content">
+            <div>
+              <h2>Endereço: <span id="endereco" for="endereco"></span></h2>
+            </div>
+            <div>
+              <h2>Bairro: <span id="bairro" for="bairro"></span></h2>
+            </div>
+            <div>
+              <h2>Cidade: <span id="cidade" for="cidade"></span></h2>
+            </div>
+            <div>
+              <h2>Estado: <span id="estado" for="estado"></span></h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
