@@ -4,35 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href=".\style.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
     <script src="script.js" type="module" defer></script>
     <title>Cadastro</title>
   </head>
   <body>
     <main class="container">
+      <h1 class="title">Buscador de Cep</h1>
       <div class="wrapper">
-        <h1 class="title">Buscar Cep</h1>
         <div class="row">
           <div class="inputbox">
-            <input type="text" id="cep" required />
-            <label for="cep">CEP</label>
-          </div>
-          <div class="button">
-            <button id="btn">Buscar</button>
-          </div>
-          <div class="content">
-            <div>
-              <h2>Endereço: <span id="endereco" for="endereco"></span></h2>
-            </div>
-            <div>
-              <h2>Bairro: <span id="bairro" for="bairro"></span></h2>
-            </div>
-            <div>
-              <h2>Cidade: <span id="cidade" for="cidade"></span></h2>
-            </div>
-            <div>
-              <h2>Estado: <span id="estado" for="estado"></span></h2>
+            <input
+              type="number"
+              class="cep"
+              placeholder="Digite aqui o CEP..."
+              onKeyPress="if(this.value.length==8) return false;"
+              required
+            />
+            <div class="button">
+              <button class="btn">Buscar</button>
             </div>
           </div>
+          <div class="content"></div>
         </div>
       </div>
     </main>

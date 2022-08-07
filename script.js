@@ -1,26 +1,54 @@
 'use strict'
 
-let fillForm = address => {
-  document.getElementById('endereco').innerHTML = address.logradouro
-  document.getElementById('bairro').innerHTML = address.bairro
-  document.getElementById('cidade').innerHTML = address.localidade
-  document.getElementById('estado').innerHTML = address.uf
-}
+const inputText = document.querySelector('.cep')
+const result = document.querySelector('.content')
+const btnRes = document.querySelector('.btn')
 
-let pesquisarCep = async () => {
-  let cep = document.getElementById('cep').value
-  let url = `https://viacep.com.br/ws/${cep}/json/`
-  // fetch(url).then(response => response.json().then(console.log))
-  let data = await fetch(url)
-  let address = await data.json()
+btnRes.addEventListener('click', searchZipCode)
 
-  if (address.hasOwnProperty('erro')) {
-    alert('CEP NÃO ENCONTRADO!')
+async function searchZipCode() {
+  const zipCode = inputText.value
+  const url = `https://viacep.com.br/ws/${zipCode}/json/`
+  if (zipCode.length === 0) {
+    result.innerHTML = `<p class="error">
+    <i class='bx bxs-error-alt'></i> Campo obrigatório! - Digite um CEP
+  </p>`
+  } else if (zipCode.length === 8) {
+    await fetch(url).then(response =>
+      response.json().then(data => {
+        // console.log(data.erro)
+        if (data.erro === 'true') {
+          result.innerHTML = `<p class="error">
+                                <i class='bx bxs-error-alt'></i> Cep não encontrado!</p>`
+        } else {
+          result.innerHTML = `            
+          <div>
+          <h2>
+            CEP: <span> ${data.cep} </span> DDD: <span> ${data.ddd} </span>
+          </h2>
+            <h2>
+              Endereço: <span> ${data.logradouro}  </span>
+            </h2>
+          </div>
+          <div>
+            <h2>Bairro: <span> ${data.bairro}</span></h2>
+          </div>
+          <div class="group-city">
+            <h2>Cidade: <span> ${data.localidade}</span></h2>
+            <h2>UF: <span> ${data.uf}</span></h2>
+          </div>
+`
+        }
+      })
+    )
   } else {
-    fillForm(address)
+    result.innerHTML = `<p class="warning">
+    <i class='bx bxs-error-alt'></i> Digite um Cep válido!  </p>`
   }
-
-  console.log(address)
 }
 
-document.getElementById('cep').addEventListener('focusout', pesquisarCep)
+document.addEventListener('keypress', e => {
+  if (e.key === 'Enter') {
+    searchZipCode()
+  }
+})
